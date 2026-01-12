@@ -1,7 +1,4 @@
 streamlit
-requests
-numpy
 pandas
-nltk
+requests
 scikit-learn
-urllib3
