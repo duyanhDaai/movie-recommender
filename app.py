@@ -99,17 +99,19 @@ def recommend(movie_title):
 # ------------------------------
 import os
 import pickle
+import streamlit as st
 
-base_path = "/content" # Đường dẫn mặc định của Colab
+# Lấy thư mục hiện tại của file app.py
+base_path = os.path.dirname(__file__)
 
 try:
-    # Đảm bảo dùng 'rb' (read binary)
-    with open(os.path.join(base_path, "movie_list.pkl"), 'rb') as f:
+    # Đọc file bằng đường dẫn tương đối
+    with open(os.path.join(base_path, 'movie_list.pkl'), 'rb') as f:
         movies = pickle.load(f)
-    with open(os.path.join(base_path, "similarity.pkl"), 'rb') as f:
+    with open(os.path.join(base_path, 'similarity.pkl'), 'rb') as f:
         similarity = pickle.load(f)
-except Exception as e:
-    st.error(f"Lỗi đọc file: {e}")
+except FileNotFoundError:
+    st.error("Không tìm thấy dữ liệu trên GitHub. Hãy kiểm tra lại Repo của bạn!")
     st.stop()
 # ------------------------------
 # 5. Giao diện chính (UI)
